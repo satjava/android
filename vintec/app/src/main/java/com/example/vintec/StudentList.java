@@ -1,11 +1,35 @@
 package com.example.vintec;
 
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class StudentList extends AppCompatActivity {
-
+    ArrayList<StudenItems> list;
+    private Activity activity;
+    private RecyclerView rv;
+    StudentAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -13,6 +37,90 @@ public class StudentList extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Vintec Computer Education");
         getSupportActionBar().setSubtitle("Students List");
+        list = new ArrayList<StudenItems>();
+        adapter = new StudentAdapter(this,list);
+        rv = (RecyclerView) findViewById(R.id.recycler_view);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
+        rv.setLayoutManager(mLayoutManager);
+        rv.setAdapter(adapter);
+        loadSupply();
+
+    }
+
+    public void loadSupply() {
+        list.clear();
+        //params.put("divn", spinDIVNval);
+//        Log.d("selected div by user-->", spinDIVNval);
+//        Log.d("selected DAY by user-->", spinDAYval);
+//        Log.d("selected EDI by user-->", spinEDIval);
+//        Log.d("selected R by user-->", spinROUTEval);
+
+
+        final ProgressDialog loading = ProgressDialog.show(StudentList.this, "JApps", "Loading Agency", false, false);
+
+        com.android.volley.toolbox.StringRequest stringRequest = new StringRequest("https://vintec.co.in/welcome/all_student",
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        loading.dismiss();
+                        Log.d("agcd==>", response.toString());
+                        JSONObject j = null;
+                        try {
+                            j = new JSONObject(response);
+                            boolean success=j.getBoolean("success");
+
+                            if(success) {
+                                JSONArray ja = j.getJSONArray("data");
+
+                                //publ = new JSONArray(publString);
+
+                                for (int i = 0; i < ja.length(); i++) {
+                                    JSONObject object = ja.getJSONObject(i);
+
+                                    StudenItems modules = new StudenItems();
+
+                                    modules.setName(object.getString("stu_id"));
+                                    modules.setCertificate(object.getString("certificate_no"));
+                                    modules.setDuration(object.getString("course_duration"));
+                                    modules.setCourse(object.getString("course_name"));
+                                    modules.setIssuedate(object.getString("issu_date"));
+
+                                    list.add(modules);
+
+
+                                }
+
+
+                            }
+                            else
+                            {
+
+                                Toast.makeText(StudentList.this,"No Student Found!!",Toast.LENGTH_SHORT).show();
+                            }
+
+                        } catch (JSONException e) {
+                            loading.dismiss();
+                            e.printStackTrace();
+                        }
+                        adapter.notifyDataSetChanged();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        loading.dismiss();
+                    }
+                });
+
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                100000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        //Creating a request queue
+        RequestQueue requestQueue = Volley.newRequestQueue( StudentList.this);
+
+        //Adding request to the queue
+        requestQueue.add(stringRequest);
 
     }
 }
