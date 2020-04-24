@@ -1,5 +1,6 @@
 package com.example.vintec;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -50,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         params.put("empcd", "JK0066");
         user = usernameField.getText().toString();
         pass = passwordField.getText().toString();
-
+        final ProgressDialog loading = ProgressDialog.show(MainActivity.this, "Vintec", "Processing..", false, false);
         String URI = "https://vintec.co.in/welcome/admin_login/"+user+"/"+pass;
        // String URL = NetworkOperation.generateUrl(URI, params);
 
@@ -59,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-
+                        loading.dismiss();
                         JSONObject j = null;
 
                         try {

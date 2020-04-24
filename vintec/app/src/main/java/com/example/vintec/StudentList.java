@@ -9,6 +9,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.RequestQueue;
@@ -22,11 +23,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
 public class StudentList extends AppCompatActivity {
     ArrayList<StudenItems> list;
+    SwipeRefreshLayout swipeRefreshLayout;
     private Activity activity;
     private RecyclerView rv;
     StudentAdapter adapter;
@@ -45,6 +44,16 @@ public class StudentList extends AppCompatActivity {
         rv.setAdapter(adapter);
         loadSupply();
 
+        swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                loadSupply();
+                adapter.notifyDataSetChanged();
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
+
     }
 
     public void loadSupply() {
@@ -56,7 +65,7 @@ public class StudentList extends AppCompatActivity {
 //        Log.d("selected R by user-->", spinROUTEval);
 
 
-        final ProgressDialog loading = ProgressDialog.show(StudentList.this, "JApps", "Loading Agency", false, false);
+        final ProgressDialog loading = ProgressDialog.show(StudentList.this, "Vintec", "Loading Students", false, false);
 
         com.android.volley.toolbox.StringRequest stringRequest = new StringRequest("https://vintec.co.in/welcome/all_student",
                 new Response.Listener<String>() {
@@ -123,4 +132,6 @@ public class StudentList extends AppCompatActivity {
         requestQueue.add(stringRequest);
 
     }
+
+
 }
