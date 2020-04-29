@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText usernameField,passwordField;
     private Button loginbtn;
     String user,pass;
+    SessionManager session;
     JSONArray MYJSON;
 
     @Override
@@ -35,15 +36,24 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         usernameField = (EditText)findViewById(R.id.username);
         passwordField = (EditText)findViewById(R.id.password);
-        loginbtn = (Button)findViewById(R.id.login);
-        loginbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),
-                        "Loging",Toast.LENGTH_SHORT).show();
-                 loginFun();
-            }
-        });
+        session = new SessionManager(getApplicationContext());
+
+        if(session.isLoggedIn()){
+            Intent i = new Intent(MainActivity.this,Dashboard.class);
+            startActivity(i);
+            finish();
+        }
+        else {
+            loginbtn = (Button) findViewById(R.id.login);
+            loginbtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(getApplicationContext(),
+                            "Loging", Toast.LENGTH_SHORT).show();
+                    loginFun();
+                }
+            });
+        }
     }
     public void loginFun(){
         Map<String, String> params = new HashMap<String, String>();
@@ -69,10 +79,11 @@ public class MainActivity extends AppCompatActivity {
                             boolean success = j.getBoolean("success");
                             Log.d("ADMIN LOGIN STATUS->", String.valueOf(j));
                             if (success) {
-
+                                session.createLoginSession(user, "satyendradv956@gmail.com");
                                 Log.d("ADMIN LOGIN STATUS->", String.valueOf(success));
-                                Intent i = new Intent(MainActivity.this,StudentList.class);
+                                Intent i = new Intent(MainActivity.this,Dashboard.class);
                                 startActivity(i);
+                                finish();
                                 //Storing the Array of JSON String to our JSON Array
 //                                MYJSON = j.getJSONArray("data");
 //                                for (int i = 0; i < MYJSON.length(); i++) {

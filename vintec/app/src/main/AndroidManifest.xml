@@ -12,10 +12,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Dashboard"></activity>
+        <activity android:name=".AddStudents" android:parentActivityName=".Dashboard"></activity>
+        <activity android:name=".Dashboard" />
         <activity
             android:name=".StudentList"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".Dashboard" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -26,6 +26,7 @@ import java.util.ArrayList;
 public class StudentList extends AppCompatActivity {
     ArrayList<StudenItems> list;
     SwipeRefreshLayout swipeRefreshLayout;
+    SessionManager session;
     private Activity activity;
     private RecyclerView rv;
     StudentAdapter adapter;
@@ -36,6 +37,7 @@ public class StudentList extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Vintec Computer Education");
         getSupportActionBar().setSubtitle("Students List");
+        session = new SessionManager(StudentList.this.getApplicationContext());
         list = new ArrayList<StudenItems>();
         adapter = new StudentAdapter(this,list);
         rv = (RecyclerView) findViewById(R.id.recycler_view);
@@ -59,7 +61,7 @@ public class StudentList extends AppCompatActivity {
     public void loadSupply() {
         list.clear();
         //params.put("divn", spinDIVNval);
-//        Log.d("selected div by user-->", spinDIVNval);
+       Log.d("session user-->", session.getUserDetails().get(SessionManager.KEY_NAME));
 //        Log.d("selected DAY by user-->", spinDAYval);
 //        Log.d("selected EDI by user-->", spinEDIval);
 //        Log.d("selected R by user-->", spinROUTEval);

@@ -11,7 +11,7 @@
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#FF0000"
+        android:background="@color/band_text_color"
         android:weightSum="6"
         android:scrollbars="horizontal"
         >
@@ -24,9 +24,11 @@
             android:layout_marginRight="1dp"
             android:layout_weight="2"
             android:gravity="center_horizontal"
+            android:background="@color/calendar_inactive_month_bg"
+
             android:paddingBottom="8dp"
             android:paddingTop="8dp"
-            android:text="Certi No"
+            android:text="Certificate No"
             android:textStyle="bold" />
 
         <TextView
@@ -36,6 +38,8 @@
             android:layout_weight="1"
             android:gravity="center_horizontal"
             android:paddingBottom="8dp"
+            android:background="@color/calendar_inactive_month_bg"
+
             android:paddingTop="8dp"
             android:text="Name"
             android:textStyle="bold" />
@@ -46,6 +50,8 @@
             android:layout_marginRight="1dp"
             android:layout_weight="1"
             android:gravity="center_horizontal"
+            android:background="@color/calendar_inactive_month_bg"
+
             android:paddingBottom="8dp"
             android:paddingTop="8dp"
             android:text="Course"
@@ -55,6 +61,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="1dp"
+            android:background="@color/calendar_inactive_month_bg"
+
             android:layout_weight="1"
             android:gravity="center_horizontal"
             android:paddingBottom="8dp"
@@ -68,8 +76,10 @@
             android:layout_weight="1"
             android:gravity="center_horizontal"
             android:paddingBottom="8dp"
+            android:background="@color/calendar_inactive_month_bg"
+
             android:paddingTop="8dp"
-            android:text="Issue Date"
+            android:text="Date"
             android:textStyle="bold" />
 
     </LinearLayout>
