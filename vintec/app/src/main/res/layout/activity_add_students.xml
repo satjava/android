@@ -40,12 +40,24 @@
             android:layout_height="wrap_content"
             android:padding="10dip"
             android:layout_below="@id/header">
+
+            <TextView android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#372c24"
+                android:text="Certificate no"/>
+            <EditText android:id="@+id/certi_no"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dip"
+                android:singleLine="true"
+
+                android:layout_marginBottom="20dip"/>
             <!-- Full Name Label -->
             <TextView android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textColor="#372c24"
                 android:text="Full Name"/>
-            <EditText android:id="@+id/reg_fullname"
+            <EditText android:id="@+id/name"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dip"
@@ -56,11 +68,35 @@
                 android:layout_height="wrap_content"
                 android:textColor="#372c24"
                 android:text="Course Name"/>
-            <EditText android:id="@+id/reg_course"
+            <EditText android:id="@+id/course"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dip"
                 android:singleLine="true"
+                android:layout_marginBottom="20dip"/>
+
+            <TextView android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#372c24"
+                android:text="Course Duration"/>
+            <EditText android:id="@+id/duration"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dip"
+                android:singleLine="true"
+
+                android:layout_marginBottom="20dip"/>
+
+            <TextView android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#372c24"
+                android:text="Grade"/>
+            <EditText android:id="@+id/grade"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dip"
+                android:singleLine="true"
+
                 android:layout_marginBottom="20dip"/>
             <!-- Password Label -->
             <TextView android:layout_width="fill_parent"
@@ -77,23 +113,13 @@
                 android:focusableInTouchMode="false"
                 android:layout_marginBottom="20dip"/>
 
-            <TextView android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#372c24"
-                android:text="Certificate no"/>
-            <EditText android:id="@+id/certi_no"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dip"
-                android:singleLine="true"
 
-                android:layout_marginBottom="20dip"/>
             <!-- Register Button -->
             <Button android:id="@+id/btnRegister"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dip"
-                android:text="Register New Account"/>
+                android:text="Register Now"/>
             <!-- Link to Login Screen -->
 
 

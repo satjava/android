@@ -58,6 +58,8 @@
             android:paddingTop="8dp"
             android:text="test data" />
 
+
+
         <TextView
             android:id="@+id/issudate"
             android:layout_width="0dp"
