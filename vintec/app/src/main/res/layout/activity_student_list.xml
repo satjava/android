@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/band_text_color"
-        android:weightSum="6"
+        android:weightSum="7"
         android:scrollbars="horizontal"
         >
 
@@ -72,6 +72,17 @@
 
 
         <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center_horizontal"
+        android:paddingBottom="8dp"
+        android:background="@color/calendar_inactive_month_bg"
+
+        android:paddingTop="8dp"
+        android:text="Date"
+        android:textStyle="bold" />
+        <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -80,7 +91,7 @@
             android:background="@color/calendar_inactive_month_bg"
 
             android:paddingTop="8dp"
-            android:text="Date"
+            android:text="Action"
             android:textStyle="bold" />
 
     </LinearLayout>

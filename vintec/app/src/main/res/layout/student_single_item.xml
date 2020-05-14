@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/band_text_color"
-        android:weightSum="6">
+        android:weightSum="7">
 
         <TextView
             android:id="@+id/certificate"
@@ -73,7 +73,17 @@
             android:paddingTop="8dp"
             android:text="test data" />
 
-
+        <Button android:id="@+id/delete"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="1dp"
+            android:layout_marginRight="1dp"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:background="@color/red"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
+            android:text="DEL"/>
     </LinearLayout>
 
 </LinearLayout>

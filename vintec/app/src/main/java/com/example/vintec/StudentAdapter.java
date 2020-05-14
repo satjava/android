@@ -1,10 +1,11 @@
 package com.example.vintec;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -44,8 +45,9 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.MyViewHo
         return items.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView name,certificate,course,duration,issuedate;
+        public Button delete;
 
         public MyViewHolder(View view) {
             super(view);
@@ -54,6 +56,18 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.MyViewHo
             course = (TextView) view.findViewById(R.id.course);
             duration = (TextView) view.findViewById(R.id.duration);
             issuedate = (TextView) view.findViewById(R.id.issudate);
+            delete.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+
+            if(R.id.delete==v.getId())
+            {
+
+                String s = items.get(getAdapterPosition()).getCertificate();
+                Log.d("certificate",s);
+            }
         }
     }
 }
