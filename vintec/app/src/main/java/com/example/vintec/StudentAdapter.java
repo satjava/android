@@ -1,7 +1,6 @@
 package com.example.vintec;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +14,7 @@ import java.util.List;
 public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.MyViewHolder>{
     private Context mContext;
     private List<StudenItems> items;
-
+    GvScr3AdapterClickListener clickListener=null;
     public StudentAdapter(Context mContext,List<StudenItems> items){
         this.mContext = mContext;
         this.items= items;
@@ -55,19 +54,36 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.MyViewHo
             certificate = (TextView) view.findViewById(R.id.certificate);
             course = (TextView) view.findViewById(R.id.course);
             duration = (TextView) view.findViewById(R.id.duration);
+            delete = (Button) view.findViewById(R.id.delete);
             issuedate = (TextView) view.findViewById(R.id.issudate);
+            itemView.setOnClickListener(this);
             delete.setOnClickListener(this);
         }
 
         @Override
-        public void onClick(View v) {
+        public void onClick(View view) {
 
-            if(R.id.delete==v.getId())
-            {
+            if (clickListener != null) {
 
-                String s = items.get(getAdapterPosition()).getCertificate();
-                Log.d("certificate",s);
+                if(R.id.delete==view.getId())
+                {
+
+                    clickListener.itemDelete(view, items.get(getAdapterPosition()).getCertificate());
+                }
+                else {
+                    clickListener.itemClicked(view, getAdapterPosition(), items.get(getAdapterPosition()).getCertificate());
+                }
             }
         }
+    }
+
+    public interface GvScr3AdapterClickListener {
+        public void itemClicked(View view, int position,String file_name);
+        public void itemDelete(View view,String file_name);
+    }
+
+
+    public void setClickListener(GvScr3AdapterClickListener clicklistener ) {
+        this.clickListener = clicklistener ;
     }
 }

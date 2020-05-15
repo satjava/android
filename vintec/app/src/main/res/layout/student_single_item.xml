@@ -83,7 +83,9 @@
             android:background="@color/red"
             android:paddingBottom="8dp"
             android:paddingTop="8dp"
-            android:text="DEL"/>
+            android:text="DEL"
+
+            />
     </LinearLayout>
 
 </LinearLayout>

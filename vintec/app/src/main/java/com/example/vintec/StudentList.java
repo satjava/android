@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,7 +24,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-public class StudentList extends AppCompatActivity {
+public class StudentList extends AppCompatActivity implements StudentAdapter.GvScr3AdapterClickListener {
     ArrayList<StudenItems> list;
     SwipeRefreshLayout swipeRefreshLayout;
     SessionManager session;
@@ -110,6 +111,9 @@ public class StudentList extends AppCompatActivity {
 
                                 Toast.makeText(StudentList.this,"No Student Found!!",Toast.LENGTH_SHORT).show();
                             }
+                            adapter = new StudentAdapter(StudentList.this,list);
+                            adapter.setClickListener(StudentList.this);
+                            rv.setAdapter(adapter);
 
                         } catch (JSONException e) {
                             loading.dismiss();
@@ -136,6 +140,28 @@ public class StudentList extends AppCompatActivity {
         requestQueue.add(stringRequest);
 
     }
+
+    @Override
+    public void itemClicked(View view, int position, String file_name) {
+        Toast.makeText(StudentList.this,file_name,Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void itemDelete(View view, String file_name) {
+        Toast.makeText(StudentList.this,file_name,Toast.LENGTH_SHORT).show();
+    }
+
+//    @Override
+//    public void itemClicked(View view, int position, String file_name) {
+//        //view_file(file_name);
+//        Toast.makeText(this,file_name,Toast.LENGTH_SHORT).show();
+//    }
+//
+//    @Override
+//    public void itemDelete(View view, String file_name) {
+//       // deleteGvFile(file_name);
+//        Toast.makeText(this,file_name,Toast.LENGTH_SHORT).show();
+//    }
 
 
 }
